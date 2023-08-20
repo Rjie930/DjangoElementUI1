@@ -189,7 +189,7 @@ SIMPLEUI_CONFIG = {
         'name': 'test',
         'icon': 'fa fa-file',
         'url': '/admin/tasks/1/',
-        },
+        }, 
         {
             'name': '任务管理',
             'icon': 'fa fa-th-list',
