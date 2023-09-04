@@ -1,0 +1,15 @@
+<!-- order_list.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>订单列表</title>
+</head>
+<body>
+    <h1>订单列表</h1>
+    <ul>
+        {% for order in orders %}
+            <li>{{ order.order_number }} - {{ order.customer_name }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

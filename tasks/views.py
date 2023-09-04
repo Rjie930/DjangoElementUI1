@@ -1,9 +1,24 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from .models import Task
+from .models import Order
 from .forms import TaskForm
 from django.contrib.auth.models import User
 
+def add_order(request):
+    if request.method == 'POST':
+        order_number = request.POST.get('order_number')
+        customer_name = request.POST.get('customer_name')
+        order = Order(order_number=order_number,customer_name=customer_name)
+        order.save()
+        return redirect('/orders')
+
+    return render(request,'tasks/add_order.html')
+
+def order_list(request):
+    orders=Order.objects.all()
+    return render(request,'tasks/order_list.html',{'orders':orders})
 
 # 创建活动
 def task_create(request):

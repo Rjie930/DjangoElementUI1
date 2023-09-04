@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+import time
 import os.path
 from pathlib import Path
 
@@ -38,7 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-     
+
     "tasks",
 
 
@@ -100,7 +101,6 @@ DATABASES = {
 }
 
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -153,19 +153,37 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-import time
 
 SIMPLEUI_CONFIG = {
     # 是否使用系统默认菜单。
     'system_keep': False,
 
     # 用于菜单排序和过滤, 不填此字段为默认排序和全部显示。 空列表[] 为全部不显示.
-    'menu_display': ['任务管理', '权限认证','test'],
+    # 'menu_display': ['任务管理', '权限认证', 'test'],
 
     # 设置是否开启动态菜单, 默认为False. 如果开启, 则会在每次用户登陆时刷新展示菜单内容。
     # 一般建议关闭。
     'dynamic': False,
     'menus': [
+
+        {
+            'name': '订单管理',
+                    'icon': 'fa fa-th-list',
+                    'models': [
+                        {
+                            'name': '添加订单',
+                            # 'icon': 'mdi mdi-plus',
+                            'url': '/admin/add_order'
+                        },
+                        {
+                            # 自2021.02.01+ 支持多级菜单，models 为子菜单名
+                            'name': '查看订单',
+                            # 'icon': 'fa fa-file',
+                            'url': '/admin/orders/',
+                        },
+                    ]
+        },
+
         {
             'app': 'auth',
             'name': '权限认证',
@@ -184,12 +202,6 @@ SIMPLEUI_CONFIG = {
             ]
         },
 
-                {
-        # 自2021.02.01+ 支持多级菜单，models 为子菜单名
-        'name': 'test',
-        'icon': 'fa fa-file',
-        'url': '/admin/tasks/1/',
-        }, 
         {
             'name': '任务管理',
             'icon': 'fa fa-th-list',
@@ -202,12 +214,12 @@ SIMPLEUI_CONFIG = {
                 },
             ]
         },
-        
+
 
 
     ]
 }
-    
+
 
 # 隐藏首页的快捷操作和最近动作
 SIMPLEUI_HOME_QUICK = False

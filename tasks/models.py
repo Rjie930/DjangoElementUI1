@@ -6,6 +6,12 @@ class Status(models.TextChoices):
     ONGOING = 'o', "正在进行的活动"
     FINISHED = 'f', "已经完成的活动"
 
+class Order(models.Model):
+    order_number = models.CharField(max_length=10)
+    customer_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.order_number
 
 class Task(models.Model):
     name = models.CharField(verbose_name="活动名称", max_length=65, unique=True)

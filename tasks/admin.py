@@ -7,3 +7,4 @@ admin.site.index_title = '活动管理后台'
 
 from .models import Task
 admin.site.register(Task)
+
